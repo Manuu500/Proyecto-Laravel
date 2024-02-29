@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Requests;
 
-use App\Http\Requests\UserRegistration;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UserController extends Controller
+class UserRegistration extends FormRequest
 {
-    public function register(UserRegistration $request)
+    public function authorize()
     {
-        $request->validate([
+        return true;
+    }
+
+    public function rules()
+    {
+        return [
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'telefono' => 'required|string|max:255',
             'tipo' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
-        ]);
+        ];
     }
 }
