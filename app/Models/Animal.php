@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Animal extends Model
+{
+    use HasFactory;
+
+    public function adoptadores()
+    {
+        return $this->belongsToMany(User::class, 'adoptar')->withPivot('fecha_adopcion');
+    }
+}

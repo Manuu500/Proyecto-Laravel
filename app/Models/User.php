@@ -45,4 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function animalesAdoptados()
+    {
+        return $this->belongsToMany(Animal::class, 'adoptar')->withPivot('fecha_adopcion');
+    }
 }
