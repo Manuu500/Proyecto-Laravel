@@ -1,4 +1,3 @@
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -8,10 +7,37 @@
 
 @include('components.header')
 
-<div class="container mt-5">
+<div style="" class="container mt-5">
     <div class="row">
         <div class="col text-center">
             <h1>LISTADO DE ANIMALES</h1>
+
+            <div class="container mt-5">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th class="p-4">Nombre</th>
+                            <th class="p-4">Raza</th>
+                            <th class="p-4">Adoptado por</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($datosAnimales as $dato)
+                        <tr>
+                            <td class="p-4">{{ $dato->nombre }}</td>
+                            <td class="p-4">{{ $dato->raza }}</td>
+                            <td class="p-4">
+                                @foreach($dato->adoptadores as $adoptador)
+                                    {{ $adoptador->nombre }}<br>
+                                @endforeach
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
+@include('components.footer')

@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Animal extends Model
 {
+    protected $table = 'animal';
     use HasFactory;
 
     public function adoptadores()
     {
-        return $this->belongsToMany(User::class, 'adoptar')->withPivot('fecha_adopcion');
+        return $this->belongsToMany(User::class, 'adoptar', 'id_animal', 'id_usuario')
+            ->withPivot('fecha_adopcion');
     }
+
+
 }
