@@ -8,27 +8,38 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Patitas solidarias</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      @if (Route::has('login'))
-        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-            @auth
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
+        <a class="navbar-brand" href="#">Patitas solidarias</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        @if (Route::has('login'))
+            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                @auth
+                @if (auth()->user()->tipo === "admin")
                 <button type="submit"
-                    class="vh-50 font-semibold text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Cerrar
-                    Sesión</button>
-            </form>
-            @else
-                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+                    onclick="window.location.href='{{ route('crud_usuarios') }}'"class="vh-50 font-semibold text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 align-middle">
+                    Panel Admin
+                </button>
+                @endif
+
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit"
+                        class="vh-50 font-semibold text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 align-middle ml-2">
+                        Cerrar Sesión
+                    </button>
+                </form>
+                @else
+                <a href="{{ route('login') }}"
+                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 align-middle">Log
+                    in</a>
 
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                <a href="{{ route('register') }}"
+                    class="ml-2 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 align-middle">Register</a>
                 @endif
-            @endauth
-        </div>
-    @endif
+                @endauth
+            </div>
+        @endif
     </div>
-  </nav>
+</nav>

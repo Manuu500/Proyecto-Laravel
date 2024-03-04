@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign("id_usu")->references("id")->on("users");
             $table->string('nombre');
             $table->boolean('adoptado');
+            $table->string('foto');
             $table->softDeletes();
             $table->timestamps();
         });

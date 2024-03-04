@@ -1,3 +1,4 @@
+
 <div style="" class="container mt-5">
     <div class="row">
         <div class="col text-center">
@@ -10,6 +11,7 @@
                             <th class="p-4">Nombre</th>
                             <th class="p-4">Razas</th>
                             <th class="p-4">Adoptado</th>
+                            <th class="p-4">Foto Animal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,11 +24,12 @@
                                     @endforeach
                                 </td>
                                 <td class="p-4">{{ $animal->adoptado ? 'Sí' : 'No' }}</td>
+                                <td class="p-4">{{ $animal->foto }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                 {{ $animales->links() }} 
+                 {{ $animales->links() }}
             </div>
         </div>
     </div>
