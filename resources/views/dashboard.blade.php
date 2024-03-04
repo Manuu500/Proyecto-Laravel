@@ -17,24 +17,26 @@
                     <thead>
                         <tr>
                             <th class="p-4">Nombre</th>
-                            <th class="p-4">Raza</th>
-                            <th class="p-4">Adoptado por</th>
+                            <th class="p-4">Razas</th>
+                            <th class="p-4">Adoptado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($datosAnimales as $dato)
-                        <tr>
-                            <td class="p-4">{{ $dato->nombre }}</td>
-                            <td class="p-4">{{ $dato->raza }}</td>
-                            <td class="p-4">
-                                @foreach($dato->adoptadores as $adoptador)
-                                    {{ $adoptador->nombre }}<br>
-                                @endforeach
-                            </td>
-                        </tr>
+                        @foreach ($animales as $animal)
+                            <tr>
+                                <td class="p-4">{{ $animal->nombre }}</td>
+                                <td class="p-4">
+                                    @foreach ($animal->razas as $raza)
+                                        {{ $raza->nombre }}<br>
+                                    @endforeach
+                                </td>
+                                <td class="p-4">{{ $animal->adoptado ? 'Sí' : 'No' }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
+
+                {{ $animales->links() }}
             </div>
         </div>
     </div>

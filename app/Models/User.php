@@ -46,8 +46,5 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function animalesAdoptados()
-    {
-        return $this->belongsToMany(Animal::class, 'adoptar')->withPivot('fecha_adopcion');
-    }
+
 }

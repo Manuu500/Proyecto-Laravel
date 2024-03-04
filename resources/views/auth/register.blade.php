@@ -1,47 +1,24 @@
-<script src="https://cdn.tailwindcss.com"></script>
-
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
-            <x-input-label for="nombre" :value="__('Nombre')" />
-            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
-            <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Apellidos -->
-        <div>
-            <x-input-label for="apellidos" :value="__('Apellidos')" />
-            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos')" required autofocus autocomplete="apellidos" />
-            <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
-        </div>
-
-        <!-- Correo -->
+        <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Correo')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" />
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Telefono -->
+        <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="telefono" :value="__('Telefono')" />
-            <x-text-input id="telefono" class="block mt-1 w-full" type="telefono" name="telefono" :value="old('telefono')" required autocomplete="telefono" />
-            <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
-        </div>
-
-        <!-- Tipo -->
-        <div class="mt-4">
-            <x-input-label for="tipo" :value="__('Tipo')" />
-            <x-text-input id="tipo" class="block mt-1 w-full" type="tipo" name="tipo" :value="old('tipo')" required autocomplete="tipo" />
-            <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
-        </div>
-
-        <!-- Contraseña -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Contraseña')" />
+            <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
