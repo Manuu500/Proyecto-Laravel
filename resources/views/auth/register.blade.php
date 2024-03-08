@@ -19,7 +19,7 @@
             background-color: #fbf2d5;
         }
     </style>
-    <title>Document</title>
+    <title>Registro</title>
 </head>
 
 <body style="background-color: #fbf2d5;">

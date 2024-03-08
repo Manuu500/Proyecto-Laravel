@@ -18,7 +18,7 @@
             background-color: #fbf2d5;
         }
     </style>
-    <title>Document</title>
+    <title>Log In</title>
 </head>
 <body style="background-color: #fbf2d5;">
     <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">

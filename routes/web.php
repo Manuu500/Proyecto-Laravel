@@ -4,6 +4,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnimalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Api\AuthController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,19 +26,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Ruta del api service
 Route::get('/dashboard', [AnimalController::class, 'listarAnimales'])->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/admin/dashboard', [UserController::class, 'listarUsuarios'])->middleware(['auth', 'verified'])->name('crud_usuarios');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Este middleware es para comporbar si alguien es admin
-Route::middleware(['auth', 'admin'])->group(function () {
-    //Ruta en la que solo si un usuario es admin, le sale la vista del crud de los usuarios
+//Este middleware es para comporbar si alguien es admin, y todas las rutas funcionan solo para el usuario administrador
+Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::match(['get', 'post'], '/admin/dashboard', [AdminController::class, 'dashboard'])->name('crud_usuarios');
+    Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::post('/dashboard', [AdminController::class, 'redirectDashboard'])->name('dashboard');
 });
+
 
 require __DIR__.'/auth.php';

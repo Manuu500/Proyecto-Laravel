@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'telefono' => ['required', 'string'],
+            'telefono' => ['required', 'numeric', 'digits:9'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -50,6 +50,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        session(['registroExitoso' => true]);
 
         return redirect(RouteServiceProvider::HOME);
     }

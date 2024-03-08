@@ -10,4 +10,10 @@ class AdminController extends Controller
 {
     return view('admin.dashboard');
 }
+
+public function redirectDashboard(Request $request)
+{
+
+    return redirect()->route('dashboard');
+}
 }

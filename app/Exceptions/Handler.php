@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +28,18 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof HttpException) {
+            $statusCode = $exception->getStatusCode();
+
+            if ($statusCode == 404) {
+                return response()->view('errores.404', [], 404);
+            }
+        }
+
+        return parent::render($request, $exception);
     }
 }
