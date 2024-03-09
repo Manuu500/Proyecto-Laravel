@@ -11,7 +11,13 @@ class Animal extends Model
     protected $table = 'animal';
     use HasFactory;
 
-
+    protected $fillable = [
+        'id',
+        'adoptado',
+        'id_usu',
+        'foto',
+        'nombre'
+    ];
     public function razas()
     {
         return $this->belongsToMany(Raza::class, 'tiene', 'id_animal', 'id_raza');

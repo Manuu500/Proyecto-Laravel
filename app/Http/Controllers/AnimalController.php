@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AnimalRegisterRequest;
+use App\Models\Animal;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-
-use App\Models\Animal;
-
-
+use App\Models\Raza;
 class AnimalController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+
+
     public function listarAnimales()
     {
         try {
@@ -22,4 +26,103 @@ class AnimalController extends Controller
         }
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $razas = Raza::all();
+
+
+        return view('livewire.create-animal', compact('razas'));
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(AnimalRegisterRequest $request)
+    {
+
+        try {
+            $animal = Animal::create([
+                'id_usu' => null,
+                'nombre' => $request->nombre,
+                'foto' => $request->foto,
+                'adoptado' => 0,
+            ]);
+
+            if ($request->hasFile('foto')) {
+                $nombreFoto = time() . "-" . $request->file('foto')->getClientOriginalName();
+                $animal->foto = $nombreFoto;
+
+                $request->file('foto')->storeAs('public/img_car', $nombreFoto);
+            }
+
+            $animal->save();
+
+            if ($request->has('razas')) {
+                $animal->razas()->sync($request->razas);
+            }
+
+            return redirect()->route('dashboard')->with("status", "Animal insertado correctamente");
+
+        } catch (QueryException $e) {
+            dd($e);
+        }
+    }
+
+    public function animalAdoptado(Request $request){
+        $animalId = $request->input('animal_id');
+        try{
+            $animal = Animal::findOrFail($animalId);
+            $animal->update([
+                'adoptado' => 1,
+                'id_usu' => auth()->user()->id,
+            ]);
+
+            return redirect('/dashboard')->with('success', 'Animal reservado con éxito!');
+        }catch(QueryException $e){
+            return redirect()->back()->with('error', 'Error al reservar el animal.');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        try{
+            $animal = Animal::find($id);
+            $animal->delete();
+            return redirect()->route('dashboard')->with('success', 'Animal borrado exitosamente.');
+        }catch(QueryException $e){
+            dd($e);
+        }
+    }
 }
+

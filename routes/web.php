@@ -35,13 +35,15 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/animal', [AnimalController::class, 'animalAdoptado'])->name('adoptar.animal');
 });
 
 //Este middleware es para comporbar si alguien es admin, y todas las rutas funcionan solo para el usuario administrador
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::match(['get', 'post'], '/admin/dashboard', [AdminController::class, 'dashboard'])->name('crud_usuarios');
-    Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
     Route::post('/dashboard', [AdminController::class, 'redirectDashboard'])->name('dashboard');
+    Route::resource('animales', AnimalController::class);
+    Route::post('/registroAnimal', [AnimalController::class, 'store'])->name('registroAnimal');
 });
 
 

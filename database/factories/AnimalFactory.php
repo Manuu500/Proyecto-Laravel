@@ -21,7 +21,7 @@ class AnimalFactory extends Factory
     public function definition()
     {
         return [
-            'id_usu' => $this->faker->numberBetween(1, 2),
+            'id_usu' => null,
             'nombre' => $this->faker->word,
             'adoptado' => $this->faker->boolean,
             'foto' => $this->faker->text()

@@ -10,7 +10,7 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->tipo === 'admin') {
+        if ($request->user()) {
             return $next($request);
         }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('animal', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_usu');
+            $table->unsignedBigInteger('id_usu')->nullable();
             $table->foreign("id_usu")->references("id")->on("users");
             $table->string('nombre');
             $table->boolean('adoptado');
