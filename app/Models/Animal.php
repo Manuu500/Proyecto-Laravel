@@ -23,4 +23,9 @@ class Animal extends Model
         return $this->belongsToMany(Raza::class, 'tiene', 'id_animal', 'id_raza');
     }
 
+    public function usuario()
+{
+    return $this->belongsTo(User::class, 'id_usu');
+}
+
 }

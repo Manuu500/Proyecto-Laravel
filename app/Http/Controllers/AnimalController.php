@@ -81,10 +81,9 @@ class AnimalController extends Controller
                 'adoptado' => 1,
                 'id_usu' => auth()->user()->id,
             ]);
-
             return redirect('/dashboard')->with('success', 'Animal reservado con éxito!');
         }catch(QueryException $e){
-            return redirect()->back()->with('error', 'Error al reservar el animal.');
+            dd($e);
         }
     }
 
@@ -118,6 +117,10 @@ class AnimalController extends Controller
 
         try {
             $animal = Animal::findOrFail($id);
+
+            if($request->adoptado == "0"){
+                $animal->id_usu = null;
+            }
 
             if ($request->hasFile('foto')) {
                 if ($animal->foto) {

@@ -28,8 +28,9 @@ Route::get('/', function () {
 
 //Ruta del api service
 Route::get('/dashboard', [AnimalController::class, 'listarAnimales'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/admin/dashboard-admin', [UserController::class, 'listarUsuarios'])->middleware(['auth', 'admin','verified'])->name('dashboard-admin');
 
-Route::get('/admin/dashboard', [UserController::class, 'listarUsuarios'])->middleware(['auth', 'verified'])->name('crud_usuarios');
+
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,8 +44,12 @@ Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::match(['get', 'post'], '/admin/dashboard', [AdminController::class, 'dashboard'])->name('crud_usuarios');
     Route::post('/dashboard', [AdminController::class, 'redirectDashboard'])->name('dashboard');
     Route::resource('animales', AnimalController::class);
+    Route::resource('usuarios', UserController::class);
+    Route::resource('admin', AdminController::class);
     Route::post('/registroAnimal', [AnimalController::class, 'store'])->name('registroAnimal');
+    Route::post('/crearusuario', [AdminController::class, 'redirigirCrearUsuario'])->name('crearusuario');
     Route::put('/editanimal/{id}', [AnimalController::class, 'edit'])->name('editarAnimal');
+    Route::put('/editausuario/{id}', [UserController::class, 'edit'])->name('editarUsuario');
 });
 
 

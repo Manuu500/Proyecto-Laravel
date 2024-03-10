@@ -125,6 +125,8 @@
                                     onclick="openDialog({{ $animal->id }})">Adoptar</button>
                                 @elseif ($animal->adoptado && $animal->id_usu === auth()->user()->id)
                                 <span>Este animal es tuyo</span>
+                                @else
+                                <span style="color:red">Este animal ha sido adoptado</span>
                                 @endif
                             </th>
                             @endif
@@ -136,7 +138,7 @@
         </div>
 
         <div class="dialog" id="dialog">
-            <p>¿Estás seguro que quieres reservar a <span id="animalName"></span>?</p>
+            <p>¿Estás seguro que quieres reservar a ese animal?</p>
             <form id="adoptionForm" method="POST" action="{{ route('adoptar.animal') }}">
                 @csrf
                 <input type="hidden" name="animal_id" id="animalId" value="">
