@@ -81,7 +81,7 @@ class AnimalController extends Controller
                 'adoptado' => 1,
                 'id_usu' => auth()->user()->id,
             ]);
-            return redirect('/dashboard')->with('success', 'Animal reservado con éxito!');
+            return redirect()->route('dashboard')->with("status", "¡Felicidades! Has adoptado un nuevo amigo :)");
         }catch(QueryException $e){
             dd($e);
         }
@@ -136,7 +136,7 @@ class AnimalController extends Controller
 
             $animal->update($request->except('foto'));
 
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with("status", "Animal editado correctamente");
         } catch (QueryException $e) {
             dd($e);
         }
@@ -152,7 +152,7 @@ class AnimalController extends Controller
         try{
             $animal = Animal::find($id);
             $animal->delete();
-            return redirect()->route('dashboard')->with('success', 'Animal borrado exitosamente.');
+            return redirect()->route('dashboard')->with("status", "Animal borrado correctamente");
         }catch(QueryException $e){
             dd($e);
         }

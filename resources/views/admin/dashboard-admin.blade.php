@@ -52,7 +52,7 @@
             transform: translate(-50%, -50%);
         }
     </style>
-    <title>Document</title>
+    <title>Panel usuarios</title>
 </head>
 
 <body style="background-color: #fbf2d5;">
@@ -74,7 +74,7 @@
                 </div>
                 <div>
                     @if (session("status"))
-                        <div>{{session("status")}}</div>
+                        <div><h3 style="color:green">{{session("status")}}</h3></div>
                     @endif
                 </div>
             </form>

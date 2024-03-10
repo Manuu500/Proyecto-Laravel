@@ -71,6 +71,10 @@
                 @livewire('CreateAnimal')
             </div>
             @endif
+
+            @if(session('status'))
+                <div><h3 style="color:green">{{session("status")}}</h3></div>
+            @endif
             <div class="container mt-5">
                 {{ $animales->links() }}
                 <table class="table table-bordered text-center">

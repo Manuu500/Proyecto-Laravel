@@ -32,11 +32,14 @@ Route::get('/admin/dashboard-admin', [UserController::class, 'listarUsuarios'])-
 
 
 
+
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/animal', [AnimalController::class, 'animalAdoptado'])->name('adoptar.animal');
+    Route::post('/dashboard', [AnimalController::class, 'listarAnimales'])->name('dashboard');
+
 });
 
 //Este middleware es para comporbar si alguien es admin, y todas las rutas funcionan solo para el usuario administrador
@@ -46,6 +49,7 @@ Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::resource('animales', AnimalController::class);
     Route::resource('usuarios', UserController::class);
     Route::resource('admin', AdminController::class);
+    Route::post('/dashboard', [AnimalController::class, 'listarAnimales'])->name('dashboard');
     Route::post('/registroAnimal', [AnimalController::class, 'store'])->name('registroAnimal');
     Route::post('/crearusuario', [AdminController::class, 'redirigirCrearUsuario'])->name('crearusuario');
     Route::put('/editanimal/{id}', [AnimalController::class, 'edit'])->name('editarAnimal');
