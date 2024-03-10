@@ -8,6 +8,7 @@ use App\Models\Animal;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Models\Raza;
+use Illuminate\Support\Facades\Storage;
 class AnimalController extends Controller
 {
     /**
@@ -100,15 +101,44 @@ class AnimalController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //dd($id);
+        $animal = Animal::findOrFail($id);
+        return view('editanimal')->with('animal', $animal);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AnimalRegisterRequest $request, string $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'adoptado' => 'required|boolean',
+        ]);
+
+        try {
+            $animal = Animal::findOrFail($id);
+
+            if ($request->hasFile('foto')) {
+                if ($animal->foto) {
+                    Storage::delete($animal->foto);
+                }
+
+                $nombreFoto = time() . $request->file('foto')->getClientOriginalName();
+
+                $rutaAlmacenada = $request->file('foto')->storeAs('public/img_car', $nombreFoto);
+
+                $animal->foto = $nombreFoto;
+            }
+
+            $animal->update($request->except('foto'));
+
+            return redirect()->route('dashboard');
+        } catch (QueryException $e) {
+            dd($e);
+        }
+
+
     }
 
     /**

@@ -44,6 +44,7 @@ Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::post('/dashboard', [AdminController::class, 'redirectDashboard'])->name('dashboard');
     Route::resource('animales', AnimalController::class);
     Route::post('/registroAnimal', [AnimalController::class, 'store'])->name('registroAnimal');
+    Route::put('/editanimal/{id}', [AnimalController::class, 'edit'])->name('editarAnimal');
 });
 
 

@@ -98,18 +98,21 @@
                             </td>
                             <td class="p-4">{{ $animal->adoptado ? 'Sí' : 'No' }}</td>
                             <td class="p-4">
-                                <img style="width:150px; height:150px" src="{{ asset('storage/img_car/' . $animal->foto) }}" alt="Foto del Animal">
+                                <img style="width:180px; height:150px" src="{{ asset('storage/img_car/' . $animal->foto) }}" alt="Foto del Animal">
 
                             </td>
                             @if (auth()->user()->tipo === "admin")
                             <td class="p-4">
-                                <button type="button"
+
+                                <form action="{{ route('animales.edit', ['animale' => $animal->id]) }}" method="GET">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit"
                                     class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Editar
                                     animal</button>
-
+                                </form>
                                 <form action="{{ route('animales.destroy', ['animale' => $animal->id]) }}" method="POST">
                                     @csrf
-                                    {{-- <input type="hidden" name="animal_id" id="animalId" value=""> --}}
                                     @method('DELETE')
                                     <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Borrar animal</button>
                                 </form>
