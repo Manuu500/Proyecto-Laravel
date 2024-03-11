@@ -89,9 +89,11 @@
                             ¿Ya estás registrado?
                         </a>
 
+                    <div>
                         <button class="btn btn-primary custom-bg-color mx-auto text-dark border border-dark">
                             {{ __('Register') }}
                         </button>
+                    </div>
                     </div>
                 </form>
             </div>

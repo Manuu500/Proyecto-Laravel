@@ -64,7 +64,7 @@
     <div class="row">
         <div class="col text-center">
 
-            <h1>LISTADO DE ANIMALES</h1>
+            <h1 class="mt-4">LISTADO DE ANIMALES</h1>
 
             @if (auth()->user()->tipo === "admin")
             <div>

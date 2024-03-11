@@ -102,7 +102,9 @@ class AnimalController extends Controller
     {
         //dd($id);
         $animal = Animal::findOrFail($id);
-        return view('editanimal')->with('animal', $animal);
+        $razas = Raza::all();
+
+        return view('editanimal', ['animal' => $animal, 'razas' => $razas]);
     }
 
     /**
@@ -121,6 +123,8 @@ class AnimalController extends Controller
             if($request->adoptado == "0"){
                 $animal->id_usu = null;
             }
+
+            $animal->razas()->sync($request->razas);
 
             if ($request->hasFile('foto')) {
                 if ($animal->foto) {

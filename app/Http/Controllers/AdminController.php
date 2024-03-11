@@ -36,7 +36,6 @@ public function redirigirCrearUsuario(){
 
  public function redirectDashboard(Request $request)
 {
-
     return  view('admin.dashboard-admin');
 }
 

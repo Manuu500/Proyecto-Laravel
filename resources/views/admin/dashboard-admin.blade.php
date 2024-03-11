@@ -38,7 +38,6 @@
             cursor: pointer;
         }
 
-        /* Estilo para el diálogo */
         .dialog {
             display: none;
             background: #fff;

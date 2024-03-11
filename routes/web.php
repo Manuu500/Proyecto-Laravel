@@ -39,6 +39,9 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/animal', [AnimalController::class, 'animalAdoptado'])->name('adoptar.animal');
     Route::post('/dashboard', [AnimalController::class, 'listarAnimales'])->name('dashboard');
+    Route::get('/perfil', [UserController::class, 'redirectProfile'])->name('perfil');
+    Route::match(['put', 'patch'], '/perfil/{id}', [UserController::class, 'updateProfile'])->name('update-profile');
+    Route::match(['put', 'patch'], '/perfil/{id}/update-contrasena', [UserController::class, 'updateContrasena'])->name('update-con');
 
 });
 

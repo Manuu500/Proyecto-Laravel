@@ -42,6 +42,15 @@
                     </div>
 
                     <!-- Razas -->
+                    <div class="mt-4">
+                        <p style="font-size: 20px">Razas</p>
+                        @foreach ($razas as $raza)
+                        <div>
+                            <input type="checkbox" wire:model="selectedRazas.{{ $raza->id }}" value="{{ $raza->id }}" name="razas[]">
+                            <label>{{ $raza->nombre }}</label>
+                        </div>
+                        @endforeach
+                    </div>
 
 
                     <!-- Adoptado -->

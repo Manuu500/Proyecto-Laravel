@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContrasenaRequest;
+use App\Http\Requests\ProfileEditRequest;
 use App\Http\Requests\UserRegistration;
 use App\Http\Requests\UserEditRequest;
 use App\Models\User;
@@ -10,6 +12,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -29,6 +32,11 @@ class UserController extends Controller
 
     public function store(UserRegistration $request){
 
+    }
+
+    public function redirectProfile(){
+        $user = Auth::user();
+        return view('perfil', ['user' => $user]);
     }
 
     public function listarUsuarios()
@@ -89,12 +97,50 @@ class UserController extends Controller
         ]);
 
         try {
-            // dd($request->all());
-
+            //dd($request->all());
             $usuario = User::findOrFail($id);
             $usuario->update($request->all());
 
             return redirect()->route('dashboard-admin')->with("status", "Usuario actualizado con éxito");
+        } catch (QueryException $e) {
+            dd($e);
+        }
+    }
+
+    public function updateProfile(ProfileEditRequest $request, string $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string',
+            'apellidos' => 'required|string',
+            'email' => 'required|string',
+            'telefono' => 'required|string|max:9',
+
+        ]);
+
+        try {
+            //dd($request->all());
+            $usuario = User::findOrFail($id);
+            $usuario->update($request->except('password'));
+
+            return redirect()->route('dashboard')->with("status", "Usuario actualizado con éxito");
+        } catch (QueryException $e) {
+            dd($e);
+        }
+    }
+
+    public function updateContrasena(ContrasenaRequest $request, string $id)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+
+        ]);
+
+        try {
+            //dd($request->all());
+            $usuario = User::findOrFail($id);
+            $usuario->update($request->all());
+
+            return redirect()->route('dashboard-admin')->with("status", "Contraseña actualizada con éxito");
         } catch (QueryException $e) {
             dd($e);
         }
