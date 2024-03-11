@@ -19,15 +19,27 @@
 
             <h3 for="nombre">Nombre del usuario:</h3>
             <input type="text" name="nombre" required>
+            @error('nombre')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
 
             <h3 class="mt-4" for="apellidos">Apellidos del usuario:</h3>
             <input type="text" name="apellidos" required>
+            @error('apellidos')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
 
             <h3 class="mt-4" for="email">Correo electrónico:</h3>
             <input type="text" name="email" required>
+            @error('email')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
 
             <h3 class="mt-4" for="telefono">Teléfono:</h3>
             <input type="text" name="telefono" required>
+            @error('telefono')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
 
             <h3 class="mt-4" for="tipo">Tipo:</h3>
             <select name="tipo" required>
@@ -37,9 +49,12 @@
 
             <h3 class="mt-4" for="password">Contraseña:</h3>
             <input type="text" name="password" required>
+            @error('password')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
 
-            <div>
-                <button class="btn btn-primary custom-bg-color mx-auto text-dark border border-dark mt-4" type="submit">Crear
+            <div class="mt-4">
+                <button  class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">Crear
                     usuario</button>
             </div>
         </form>
@@ -47,3 +62,4 @@
     </div>
     @endif
 </div>
+

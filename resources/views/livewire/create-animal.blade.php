@@ -33,7 +33,10 @@
             <h3 class="mt-4">Foto del animal</h3>
             <input type="file" name="foto" accept="image/*" required>
 
-            <button type="submit">Crear Animal</button>
+            <div class="mt-4">
+                <button  class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">Crear
+                    animal</button>
+            </div>
         </form>
     </div>
     </div>

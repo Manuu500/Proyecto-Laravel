@@ -63,10 +63,7 @@ class UserController extends Controller
              $usuario->delete();
              DB::commit();
 
-             // Fetch the updated list of animals
-             $animales = Animal::paginate(3);
-
-            $usuarios = User::paginate(3); // Adjust the pagination value as needed
+            $usuarios = User::paginate(3);
             return redirect()->route('dashboard-admin')->with("status", "Usuario borrado correctamente");
 
          } catch (QueryException $e) {
@@ -83,8 +80,13 @@ class UserController extends Controller
 
     public function create()
     {
-        $usuarios = User::paginate(3);
-        return view('admin.dashboard-admin', ['usuarios' => $usuarios]);
+        try {
+            $usuarios = User::paginate(3);
+            return view('admin.dashboard-admin', ['usuarios' => $usuarios]);
+        } catch (QueryException $e) {
+            dd($e);
+        }
+
     }
     public function update(UserEditRequest $request, string $id)
     {

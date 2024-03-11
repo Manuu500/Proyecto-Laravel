@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{{ asset('imagenes/patitas_solidarias.jpg') }}" type="image/x-icon">
+
 
         <style>
             #sobreNosotrosText {
@@ -40,33 +42,7 @@
     </head>
     <body style="background-color: #fbf2d5;">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Patitas solidarias</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                    @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                    @else
-                    <a href="{{ route('login') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                        in</a>
 
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}"
-                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                    @endif
-                    @endauth
-                </div>
-                @endif
-            </div>
-        </nav>
 
 
         <div class="container-fluid">
@@ -79,7 +55,8 @@
                         <p>Tenemos sedes en todas las ciudades de España, desde Málaga hasta Barcelona.</p>
                         <div>
                             <button type="button" onclick="window.location='{{ route('dashboard') }}'"
-                                class="btn btn-primary">Ver animales disponibles</button>
+                            class="btn btn-register text-white" style="background-color: grey; color: #000; border: 1px solid #000;">Ver animales disponibles</button>
+
                             {{-- <button type="button" class="btn btn-primary">Primary</button>
                             <button type="button" class="btn btn-primary">Primary</button> --}}
                         </div>

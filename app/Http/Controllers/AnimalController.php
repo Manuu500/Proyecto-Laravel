@@ -100,13 +100,18 @@ class AnimalController extends Controller
      */
     public function edit(string $id)
     {
-        //dd($id);
-        $animal = Animal::findOrFail($id);
-        $razas = Raza::all();
-        $razasSeleccionadas = $animal->razas->pluck('id')->toArray();
+        try {
+            //dd($id);
+            $animal = Animal::findOrFail($id);
+            $razas = Raza::all();
+            $razasSeleccionadas = $animal->razas->pluck('id')->toArray();
 
 
-        return view('editanimal', ['animal' => $animal, 'razas' => $razas, 'razasSeleccionadas' => $razasSeleccionadas]);
+            return view('editanimal', ['animal' => $animal, 'razas' => $razas, 'razasSeleccionadas' => $razasSeleccionadas]);
+        } catch (QueryException $e) {
+            dd($e);
+        }
+
     }
 
     /**
@@ -156,12 +161,14 @@ class AnimalController extends Controller
     public function destroy(string $id)
     {
         try{
-            $animal = Animal::find($id);
+            $animal = Animal::findOrFail($id);
             $animal->delete();
             return redirect()->route('dashboard')->with("status", "Animal borrado correctamente");
         }catch(QueryException $e){
             dd($e);
         }
     }
+
+
 }
 
