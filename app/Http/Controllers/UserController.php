@@ -45,7 +45,7 @@ class UserController extends Controller
             $usuarios = User::paginate(3);
             return view('admin.dashboard-admin', compact('usuarios'));
         } catch (QueryException $e) {
-            Log::error('Error SQL: ' . $e->getMessage());
+            dd($e);
             return redirect()->route('error')->with('error_message', 'No se pudo encontrar a los animales');
         }
     }
@@ -56,26 +56,31 @@ class UserController extends Controller
 
      public function destroy(string $id)
      {
-         try {
-             $usuario = User::findOrFail($id);
-             $usuario->animales()->update(['id_usu' => null]);
-             Animal::where('id_usu', $id)->where('adoptado', true)->update(['adoptado' => false]);
-             $usuario->delete();
-             DB::commit();
+        try {
+            $usuario = User::findOrFail($id);
+            $usuario->animales()->update(['id_usu' => null]);
+            Animal::where('id_usu', $id)->where('adoptado', true)->update(['adoptado' => false]);
+            $usuario->delete();
+            DB::commit();
 
             //$usuarios = User::paginate(3);
             return redirect()->route('dashboard-admin')->with("status", "Usuario borrado correctamente");
 
-         } catch (QueryException $e) {
-             return response()->json(['success' => false, 'error' => $e->getMessage()]);
-         }
+        } catch (QueryException $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
      }
 
     public function edit(string $id)
     {
-        //dd($id);
-        $usuario = User::findOrFail($id);
-        return view('editausuario')->with('usuario', $usuario);
+        try {
+            //dd($id);
+            $usuario = User::findOrFail($id);
+            return view('editausuario')->with('usuario', $usuario);
+        } catch (QueryException $e) {
+            dd($e);
+        }
+
     }
 
     public function create()

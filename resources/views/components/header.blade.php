@@ -39,6 +39,7 @@
                 </form>
                 @endif
 
+                @if (auth()->user()->tipo === "admin")
                 <form action="{{ route('dashboard') }}" method="POST" class="d-inline">
                     @csrf
                     <button type="submit"
@@ -46,6 +47,7 @@
                         Panel de animales
                     </button>
                 </form>
+                @endif
 
                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                     @csrf

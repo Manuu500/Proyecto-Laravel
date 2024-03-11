@@ -22,7 +22,7 @@ class AnimalController extends Controller
             $animales = Animal::with('razas')->paginate(3);
             return view('dashboard', compact('animales'));
         } catch (QueryException $e) {
-            Log::error('Error SQL: ' . $e->getMessage());
+            dd($e);
             return redirect()->route('error')->with('error_message', 'No se pudo encontrar a los animales');
         }
     }
@@ -32,10 +32,13 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        $razas = Raza::all();
+        try {
+            $razas = Raza::all();
+            return view('livewire.create-animal', compact('razas'));
+        } catch (QueryException $e) {
+            dd($e);
+        }
 
-
-        return view('livewire.create-animal', compact('razas'));
     }
 
 
@@ -74,6 +77,7 @@ class AnimalController extends Controller
     }
 
     public function animalAdoptado(Request $request){
+        //Utiliza el meteodo input para coger el parametro dle id
         $animalId = $request->input('animal_id');
         try{
             $animal = Animal::findOrFail($animalId);
@@ -104,6 +108,7 @@ class AnimalController extends Controller
             //dd($id);
             $animal = Animal::findOrFail($id);
             $razas = Raza::all();
+            //Aqui se extrae un array con los valores de una columna, en este caso las razas
             $razasSeleccionadas = $animal->razas->pluck('id')->toArray();
 
 

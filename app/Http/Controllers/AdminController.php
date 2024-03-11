@@ -30,7 +30,8 @@ class AdminController extends Controller
 
 }
 
-public function redirigirCrearUsuario(){
+public function redirigirCrearUsuario()
+{
     return view('admin.dashboard-admin');
 }
 
@@ -44,8 +45,13 @@ public function redirigirCrearUsuario(){
      */
     public function create()
     {
-        $usuarios = User::paginate(3);
-        return view('admin.dashboard-admin', ['usuarios' => $usuarios]);
+    //     try {
+    //         $usuarios = User::paginate(3);
+    //         return view('admin.dashboard-admin', ['usuarios' => $usuarios]);
+    //     } catch (QueryException $e) {
+    //         dd($e);
+    //     }
+
     }
 
     /**
@@ -64,7 +70,7 @@ public function redirigirCrearUsuario(){
         ]);
 
         $usuario->save();
-        $usuarios = User::paginate(3);
+        //$usuarios = User::paginate(3);
         return redirect()->route('dashboard-admin')->with("status", "Usuario insertado correctamente");
 
 
