@@ -140,7 +140,7 @@ class UserController extends Controller
             $usuario = User::findOrFail($id);
             $usuario->update($request->all());
 
-            return redirect()->route('dashboard-admin')->with("status", "Contraseña actualizada con éxito");
+            return redirect()->route('dashboard')->with("status", "Contraseña actualizada con éxito");
         } catch (QueryException $e) {
             dd($e);
         }

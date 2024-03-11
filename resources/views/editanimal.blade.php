@@ -46,7 +46,8 @@
                         <p style="font-size: 20px">Razas</p>
                         @foreach ($razas as $raza)
                         <div>
-                            <input type="checkbox" wire:model="selectedRazas.{{ $raza->id }}" value="{{ $raza->id }}" name="razas[]">
+                            <input type="checkbox" wire:model="selectedRazas.{{ $raza->id }}" value="{{ $raza->id }}" name="razas[]"
+                                @if(in_array($raza->id, $razasSeleccionadas)) checked @endif>
                             <label>{{ $raza->nombre }}</label>
                         </div>
                         @endforeach

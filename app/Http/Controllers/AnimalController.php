@@ -103,8 +103,10 @@ class AnimalController extends Controller
         //dd($id);
         $animal = Animal::findOrFail($id);
         $razas = Raza::all();
+        $razasSeleccionadas = $animal->razas->pluck('id')->toArray();
 
-        return view('editanimal', ['animal' => $animal, 'razas' => $razas]);
+
+        return view('editanimal', ['animal' => $animal, 'razas' => $razas, 'razasSeleccionadas' => $razasSeleccionadas]);
     }
 
     /**
