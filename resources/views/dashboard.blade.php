@@ -61,7 +61,7 @@
 
 
     {{-- @livewire('TablaAnimales') --}}
-    <div class="row">
+    <div class="row mt-5">
         <div class="col text-center">
 
             <h1 class="mt-4">LISTADO DE ANIMALES</h1>

@@ -57,8 +57,7 @@
 <body style="background-color: #fbf2d5;">
     @include('components.header')
 
-
-    <div style="" class="container mt-5">
+    <div class="container mt-5">
     <div class="row">
         <div class="col text-center">
             <h1>USUARIOS REGISTRADOS EN EL SISTEMA</h1>

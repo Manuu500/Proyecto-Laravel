@@ -63,7 +63,7 @@ class UserController extends Controller
              $usuario->delete();
              DB::commit();
 
-            $usuarios = User::paginate(3);
+            //$usuarios = User::paginate(3);
             return redirect()->route('dashboard-admin')->with("status", "Usuario borrado correctamente");
 
          } catch (QueryException $e) {
